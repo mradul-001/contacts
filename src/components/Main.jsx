@@ -36,6 +36,15 @@ function MainSec() {
 
   }
 
+  function deleteContact(phone) {
+    if (window.confirm("Are you sure you want to delete this contact?")) {
+      const curdata = JSON.parse(localStorage.getItem("contactlist")) || [];
+      const updated = curdata.filter((c) => c.phone !== phone);
+      localStorage.setItem("contactlist", JSON.stringify(updated));
+      setContacts(updated);
+    }
+  }
+
   const filtered = contacts.filter(
     (c) =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -43,10 +52,10 @@ function MainSec() {
   );
 
   return (
-    <div className="flex flex-col h-auto md:h-[80vh] m-0 md:m-10">
+    <div className="flex flex-col h-auto md:h-[80vh] m-0 md:m-10 px-4 mb-4 md:px-0">
 
       <div className="listsection w-full flex justify-center h-[100%]">
-        <div className="container h-[100%] flex flex-col w-full md:w-2/3 lg:w-1/2 mx-auto bg-white rounded-lg px-8 py-10 border border-gray-200">
+        <div className="container h-[100%] flex flex-col w-full md:w-2/3 lg:w-1/2 mx-auto bg-white rounded-lg px-4 md:px-8 py-6 md:py-10 border border-gray-200">
           <div className="flex gap-3 mb-6">
             <div className="flex-1 relative">
               <svg
@@ -98,6 +107,15 @@ function MainSec() {
                       {c.phone}
                     </p>
                   </div>
+                  <button
+                    onClick={() => deleteContact(c.phone)}
+                    className="flex-shrink-0 p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                    aria-label="Delete contact"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
                 </div>
               ))
             ) : (
@@ -139,16 +157,9 @@ function MainSec() {
           }}
         >
           <div 
-            className="container bg-white rounded-lg px-10 py-12 w-full max-w-md mx-4 relative border border-gray-200"
+            className="container bg-white rounded-lg px-6 md:px-10 py-8 md:py-12 w-full max-w-md mx-4 relative border border-gray-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setShowAddForm(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200 text-2xl font-bold w-8 h-8 flex items-center justify-center"
-              aria-label="Close"
-            >
-              ×
-            </button>
 
             <h1 className="text-gray-900 font-alumni font-bold text-2xl mb-2">Add a Contact</h1>
             <p className="text-gray-600 text-sm mb-8 font-alumni">Create a new contact entry</p>
@@ -161,7 +172,7 @@ function MainSec() {
                 type="text"
                 name="name"
                 id="name"
-                placeholder="John Doe"
+                placeholder="Mradul"
                 className="w-full rounded-lg font-alumni bg-white border border-gray-300 text-gray-900 placeholder-gray-400 p-3 outline-none focus:border-blue-500 transition-colors duration-200 text-base"
               />
             </div>
@@ -177,12 +188,24 @@ function MainSec() {
                 className="w-full rounded-lg font-alumni bg-white border border-gray-300 text-gray-900 placeholder-gray-400 p-3 outline-none focus:border-blue-500 transition-colors duration-200 text-base"
               />
             </div>
-            <button
-              className="w-full mt-2 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white text-base font-medium py-3.5 rounded-lg font-alumni"
-              onClick={saveContact}
-            >
-              Save Contact
-            </button>
+            <div className="flex gap-3 mt-2">
+              <button
+                className="flex-1 bg-gray-200 hover:bg-gray-300 transition-colors duration-200 text-gray-700 text-base font-medium py-3.5 rounded-lg font-alumni"
+                onClick={() => {
+                  setShowAddForm(false);
+                  document.getElementById("name").value = "";
+                  document.getElementById("phone").value = "";
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="flex-1 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white text-base font-medium py-3.5 rounded-lg font-alumni"
+                onClick={saveContact}
+              >
+                Save Contact
+              </button>
+            </div>
           </div>
         </div>
       )}
