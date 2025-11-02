@@ -54,8 +54,8 @@ function MainSec() {
   return (
     <div className="flex flex-col h-auto md:h-[80vh] m-0 md:m-10 px-4 mb-4 md:px-0">
 
-      <div className="listsection w-full flex justify-center h-[100%]">
-        <div className="container h-[100%] flex flex-col w-full md:w-2/3 lg:w-1/2 mx-auto bg-white rounded-lg px-4 md:px-8 py-6 md:py-10 border border-gray-200">
+      <div className="listsection w-full flex justify-center h-[90%]">
+        <div className="container shadow-2xl shadow-gray-900 h-[100%] flex flex-col w-full md:w-2/3 lg:w-1/2 mx-auto bg-white rounded-lg px-4 md:px-8 py-6 md:py-10 border border-gray-200">
           <div className="flex gap-3 mb-6">
             <div className="flex-1 relative">
               <svg
@@ -83,7 +83,7 @@ function MainSec() {
             </div>
             <button
               onClick={() => setShowAddForm(true)}
-              className="bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white text-base font-medium px-6 py-3 rounded-lg font-alumni whitespace-nowrap"
+              className="bg-[#0066FF] hover:bg-[#0059dd] transition-colors duration-200 text-white text-base font-medium px-6 py-3 rounded-lg font-alumni whitespace-nowrap"
             >
               + Add Contact
             </button>
@@ -93,9 +93,9 @@ function MainSec() {
               filtered.map((c, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors duration-200"
+                  className="flex cursor-pointer items-center gap-4 p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors duration-200"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold text-lg">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#0066FF] flex items-center justify-center text-white font-semibold text-lg">
                     {c.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -200,7 +200,7 @@ function MainSec() {
                 Cancel
               </button>
               <button
-                className="flex-1 bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white text-base font-medium py-3.5 rounded-lg font-alumni"
+                className="flex-1 bg-[#0066FF] hover:bg-[#0066FF] transition-colors duration-200 text-white text-base font-medium py-3.5 rounded-lg font-alumni"
                 onClick={saveContact}
               >
                 Save Contact
